@@ -101,6 +101,8 @@ export default class Request extends Body {
 		this.agent = init.agent || input.agent;
 		this.highWaterMark = init.highWaterMark || input.highWaterMark || 16384;
 		this.insecureHTTPParser = init.insecureHTTPParser || input.insecureHTTPParser || false;
+		//Added;
+		this.localAddress = init.localAddress || input.localAddress;
 	}
 
 	get method() {
@@ -217,7 +219,8 @@ export const getNodeRequestOptions = request => {
 		method: request.method,
 		headers: headers[Symbol.for('nodejs.util.inspect.custom')](),
 		insecureHTTPParser: request.insecureHTTPParser,
-		agent
+		agent,
+		localAddress: request.localAddress, //Added;
 	};
 
 	return requestOptions;
